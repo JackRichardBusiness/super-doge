@@ -1,0 +1,48 @@
+{
+    "id":0,
+    "length":60,
+    "level":{
+        "objects": {
+                "bush":[
+
+                ],
+                "sky":[
+
+                ],
+                "cloud":[
+
+                ],
+                "pipe":[
+
+                ],
+                "ground":[
+
+                ]
+            },
+        "layers": {
+                "sky":{
+                    "x":[0,60],
+                    "y":[0,13]
+                },
+                "ground":{
+                    "x":[0,60],
+                    "y":[14,16]
+                }
+            },
+        "entities": {
+                "randomBox":[
+
+                ],
+                "coin":[
+
+                ],
+                "Goomba":[
+
+                ],
+                "Koopa":[
+                    
+                ]
+            }
+
+    }
+}
