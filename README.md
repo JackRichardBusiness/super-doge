@@ -1,8 +1,9 @@
-# Super Mario Implementation in Python
+# Super Mario in Python
 
-This is inspired by Meth-Meth-Method's: https://github.com/meth-meth-method/super-mario/
+This is inspired by: https://github.com/meth-meth-method/super-mario/
+Forked from: https://github.com/mx0c/super-mario-python
 
-## Running
+## Running for testing
 
 * $ pip install pygame scipy
 * $ python main.py
@@ -16,18 +17,8 @@ This is inspired by Meth-Meth-Method's: https://github.com/meth-meth-method/supe
 
 * Left: Move left  
 * Right: Move right  
-* Space: Jump  
-* Shift: Boost   
-* Left/Right Mouseclick: secret   
+* Space: Jump
 
-## Current state:
-![Alt text](img/pics.png "current state")
-
-## Dependencies
+## Required dependencies
 * pygame
 * scipy
-
-## Contribution
-
-If you have any Improvements/Ideas/Refactors feel free to contact me or make a Pull Request.
-The code needs still alot of refactoring as it is right now, so i appreciate any kind of Contribution.
