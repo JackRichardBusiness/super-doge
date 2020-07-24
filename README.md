@@ -4,15 +4,9 @@ This is inspired by: https://github.com/meth-meth-method/super-mario/
 
 Forked from: https://github.com/mx0c/super-mario-python
 
-## Running for testing
+## Running
 
-* $ pip install pygame scipy
 * $ python main.py
-
-## Standalone windows build
-
-* $ pip install py2exe
-* $ python compile.py py2exe
 
 ## Controls
 
@@ -21,5 +15,5 @@ Forked from: https://github.com/mx0c/super-mario-python
 * Space: Jump
 
 ## Required dependencies
-* pygame
-* scipy
+
+* $ pip install pygame scipy
