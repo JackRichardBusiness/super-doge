@@ -1,6 +1,9 @@
 import pygame
 from pygame.locals import *
 import sys
+from time import sleep
+import json
+from random import randint
 
 from classes.Sprites import Sprites
 from classes.Tile import Tile
@@ -53,12 +56,45 @@ class Input:
                 level.level[self.mouseY / 32][(self.mouseX / 32) + x_offset] = Tile(level.sprites.spriteCollection.get("sky"), None)
             elif pressedKeys[K_o]:
                 level.addCoin((self.mouseX / 32) + x_offset, self.mouseY/32)
+                sleep(0.5)
             elif pressedKeys[K_r]:
                 level.addRandomBox((self.mouseX / 32) + x_offset, self.mouseY/32)
             elif pressedKeys[K_g]:
                 level.addGoomba((self.mouseX / 32) + x_offset, self.mouseY/32)
+                sleep(0.5)
             elif pressedKeys[K_k]:
-                level.addKoopa((self.mouseX / 32) + x_offset, self.mouseY/32)    
+                level.addKoopa((self.mouseX / 32) + x_offset, self.mouseY/32)
+                sleep(0.5)
+            elif pressedKeys[K_s]:
+                print "Saving level..."
+                idFile = str(randint(0,999))
+                data = {"id": int(idFile), "length": 60, "level": { "layers": { "sky":{ "x":[0,60], "y":[0,13] }, "ground":{"x":[0,60], "y":[14,16]}}, "objects": {"bush":[], "sky":[], "cloud":[], "pipe":[], "ground":[]}, "entities": {"randomBox":[], "coin":[], "Goomba":[], "Koopa":[]}}}
+                for item in level.entityList:
+                    print "Found " + item.__class__.__name__ + " at " + str(int(item.rect.x / 32)) + "," + str(int(item.rect.y / 32))
+                    if not item.__class__.__name__ == "Coin":
+                        data["level"]["entities"][item.__class__.__name__].append([int(item.rect.x / 32), int(item.rect.y / 32)])
+                    else:
+                        data["level"]["entities"][item.__class__.__name__.lower()].append([int(item.rect.x / 32), int(item.rect.y / 32)])
+                for x in range(level.levelLength):
+                    for y in range(15):
+                        if level.level[y][x].sprite == level.sprites.spriteCollection.get("pipeL"):
+                            print "Found pipe at " + str(x) + "," + str(y)
+                            data["level"]["objects"]["pipe"].append([x, y, 14])
+                        elif level.level[y][x].sprite == level.sprites.spriteCollection.get("bush_1"):
+                            print "Found bush at " + str(x) + "," + str(y)
+                            data["level"]["objects"]["bush"].append([x, y])
+                        elif level.level[y][x].sprite == None:
+                            print "Found box at " + str(x) + "," + str(y)
+                            data["level"]["entities"]["randomBox"].append([x, y])
+                        elif level.level[y][x].sprite == level.sprites.spriteCollection.get("cloud0_0"):
+                            print "Found cloud at " + str(x) + "," + str(y)
+                            data["level"]["objects"]["cloud"].append([x, y])
+                        elif level.level[y][x].sprite == level.sprites.spriteCollection.get("ground"):
+                            print "Found ground at " + str(x) + "," + str(y)
+                            data["level"]["objects"]["ground"].append([x, y])
+                with open("level_" + str(randint(0, 999)) + ".json", "w") as write_file:
+                    json.dump(data, write_file)
+                sleep(1)
 
     def checkForMouseInput(self):
         mouseX, mouseY = pygame.mouse.get_pos()
