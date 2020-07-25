@@ -4,9 +4,9 @@ from classes.Maths import vec2D
 
 
 class EntityBase(object):
-    def __init__(self, x, y, gravity):
+    def __init__(self, x, y, gravity, size=32):
         self.vel = vec2D()
-        self.rect = pygame.Rect(x * 32, y * 32, 32, 32)
+        self.rect = pygame.Rect(x * 32, y * 32, size, size)
         self.gravity = gravity
         self.traits = None
         self.alive = True
@@ -15,6 +15,7 @@ class EntityBase(object):
         self.type = ""
         self.onGround = False
         self.obeygravity = True
+        self.size = size
         
     def applyGravity(self):
         if self.obeygravity:
@@ -28,7 +29,7 @@ class EntityBase(object):
                 pass
 
     def getPosIndex(self):
-        return vec2D(int(self.rect.x / 32), int(self.rect.y / 32))
+        return vec2D(int(self.rect.x / self.size), int(self.rect.y / self.size))
 
     def getPosIndexAsFloat(self):
-        return vec2D(self.rect.x / 32.0, self.rect.y / 32.0)
+        return vec2D((self.rect.x / float(self.size)), (self.rect.y / float(self.size)))

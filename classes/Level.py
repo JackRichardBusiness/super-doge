@@ -7,6 +7,7 @@ from entities.Coin import Coin
 from entities.Goomba import Goomba
 from entities.Koopa import Koopa
 from entities.RandomBox import RandomBox
+from entities.Lacy import Lacy
 
 class Level:
     def __init__(self, screen, sound, dashboard):
@@ -35,7 +36,9 @@ class Level:
             [self.addGoomba(x, y) for x, y in data["level"]["entities"]["Goomba"]]
             [self.addKoopa(x, y) for x, y in data["level"]["entities"]["Koopa"]]
             [self.addCoin(x, y) for x, y in data["level"]["entities"]["coin"]]
-        except:
+            self.addLacy(10, 0)
+        except Exception as e:
+            print e
             #if no entities in Level
             pass
 
@@ -165,6 +168,11 @@ class Level:
     def addGoomba(self, x, y):
         self.entityList.append(
             Goomba(self.screen, self.sprites.spriteCollection, x, y, self)
+        )
+
+    def addLacy(self, x, y):
+        self.entityList.append(
+            Lacy(self.screen, self.sprites.spriteCollection, x, y, self)
         )
 
     def addKoopa(self, x, y):
