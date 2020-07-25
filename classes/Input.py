@@ -72,7 +72,10 @@ class Input:
                 for item in level.entityList:
                     print "Found " + item.__class__.__name__ + " at " + str(int(item.rect.x / 32)) + "," + str(int(item.rect.y / 32))
                     if not item.__class__.__name__ == "Coin":
-                        data["level"]["entities"][item.__class__.__name__].append([int(item.rect.x / 32), int(item.rect.y / 32)])
+                        if item.__class__.__name__ == "RandomBox":
+                            data["level"]["entities"]["randomBox"].append([int(item.rect.x / 32), int(item.rect.y / 32)])
+                        else:
+                            data["level"]["entities"][item.__class__.__name__].append([int(item.rect.x / 32), int(item.rect.y / 32)])
                     else:
                         data["level"]["entities"][item.__class__.__name__.lower()].append([int(item.rect.x / 32), int(item.rect.y / 32)])
                 for x in range(level.levelLength):
@@ -86,7 +89,7 @@ class Input:
                         elif level.level[y][x].sprite == None:
                             print "Found box at " + str(x) + "," + str(y)
                             data["level"]["entities"]["randomBox"].append([x, y])
-                        elif level.level[y][x].sprite == level.sprites.spriteCollection.get("cloud0_0"):
+                        elif level.level[y][x].sprite == level.sprites.spriteCollection.get("cloud1_1"):
                             print "Found cloud at " + str(x) + "," + str(y)
                             data["level"]["objects"]["cloud"].append([x, y])
                         elif level.level[y][x].sprite == level.sprites.spriteCollection.get("ground"):
