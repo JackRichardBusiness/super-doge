@@ -47,6 +47,7 @@ class Mario(EntityBase):
         self.dashboard = dashboard
         self.restart = False
         self.pause = False
+        self.stunned = False
         self.pauseObj = Pause(screen, self, dashboard)
 
     def update(self):
@@ -64,10 +65,11 @@ class Mario(EntityBase):
         self.input.checkForInput(self.levelObj.makermode, self.levelObj, self)
 
     def moveMario(self):
-        self.rect.y += self.vel.y
-        self.collision.checkY()
-        self.rect.x += self.vel.x
-        self.collision.checkX()
+        if not self.stunned:
+            self.rect.y += self.vel.y
+            self.collision.checkY()
+            self.rect.x += self.vel.x
+            self.collision.checkX()
 
     def checkEntityCollision(self):
         for ent in self.levelObj.entityList:
@@ -157,3 +159,7 @@ class Mario(EntityBase):
     def setPos(self,x,y):
         self.rect.x = x
         self.rect.y = y
+
+    def stun(self):
+        print "Stunned!"
+        self.stunned = True

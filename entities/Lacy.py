@@ -1,8 +1,8 @@
 from classes.Animation import Animation
 from classes.Maths import vec2D
 from entities.EntityBase import EntityBase
-from traits.leftrightwalk import LeftRightWalkTrait
-
+from traits.lacyfight import LacyFight
+from time import sleep
 
 class Lacy(EntityBase):
     def __init__(self, screen, spriteColl, x, y, level):
@@ -15,11 +15,17 @@ class Lacy(EntityBase):
             ]
         )
         self.screen = screen
-        self.leftrightTrait = LeftRightWalkTrait(self, level)
+        self.leftrightTrait = LacyFight(self, level)
         self.type = "Mob"
+        self.inAir = False
+        self.inJump = False
         self.dashboard = level.dashboard
+        self.lives = 3
+        self.level = level
 
     def update(self, camera):
+        if self.lives < 1:
+            self.drawFlatGoomba(camera)
         if self.alive:
             self.applyGravity()
             self.drawLacy(camera)
@@ -35,17 +41,16 @@ class Lacy(EntityBase):
         if self.timer == 0:
             self.setPointsTextStartPosition(self.rect.x + 3, self.rect.y)
         if self.timer < self.timeAfterDeath:
-            self.movePointsTextUpAndDraw(camera)
-            self.drawFlatGoomba(camera)
+            self.lives = self.lives - 1
         else:
             self.alive = None
         self.timer += 0.1
 
     def drawFlatGoomba(self, camera):
-        self.screen.blit(
-            self.spriteCollection.get("goomba-flat").image,
-            (self.rect.x + camera.x, self.rect.y),
-        )
+        self.level.mario.sound.music_channel.stop()
+        self.level.mario.sound.play_sfx(self.level.mario.sound.clear)
+        sleep(6.5)
+        self.level.mario.restart = True
 
     def setPointsTextStartPosition(self, x, y):
         self.textPos = vec2D(x, y)

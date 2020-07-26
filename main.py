@@ -24,6 +24,7 @@ def main():
         menu.update()
 
     mario = Mario(0, 0, level, screen, dashboard, sound)
+    level.mario = mario
     clock = pygame.time.Clock()
 
     while not mario.restart:

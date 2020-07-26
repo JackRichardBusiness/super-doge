@@ -31,6 +31,8 @@ class Input:
             self.entity.traits["goTrait"].direction = -1
         elif pressedKeys[K_RIGHT] or pressedKeys[K_l] and not pressedKeys[K_LEFT]:
             self.entity.traits["goTrait"].direction = 1
+        elif pressedKeys[K_s]:
+            self.entity.stunned = False
         else:
             self.entity.traits['goTrait'].direction = 0
 

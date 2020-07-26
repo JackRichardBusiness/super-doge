@@ -18,6 +18,14 @@
             "scalefactor":4,
             "colorKey":0,
             "collision":false
+        },
+        {
+            "name":"lacy-flat",
+            "x":277,
+            "y":187,
+            "scalefactor":4,
+            "colorKey":0,
+            "collision":false
         }
     ]
 }

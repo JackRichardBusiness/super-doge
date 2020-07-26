@@ -19,24 +19,30 @@ class Level:
         self.levelLength = 0
         self.entityList = []
         self.makermode = False
+        self.mario = None
 
     def loadLevel(self, levelname):
         with open("./levels/{}.json".format(levelname)) as jsonData:
             data = json.load(jsonData)
             self.loadLayers(data)
             self.loadObjects(data)
-            self.loadEntities(data)
+            self.loadEntities(data, levelname)
             self.levelLength = data["length"]
             if levelname == "Level0-0":
                 self.makermode = True
 
-    def loadEntities(self, data):
+    def loadEntities(self, data, levelname=""):
         try:
             [self.addRandomBox(x, y) for x, y in data["level"]["entities"]["randomBox"]]
             [self.addGoomba(x, y) for x, y in data["level"]["entities"]["Goomba"]]
             [self.addKoopa(x, y) for x, y in data["level"]["entities"]["Koopa"]]
             [self.addCoin(x, y) for x, y in data["level"]["entities"]["coin"]]
-            self.addLacy(10, 0)
+            world = int(levelname.split("Level")[1].split("-")[0])
+            level = int(levelname.split("Level")[1].split("-")[1])
+            if level == 6:
+                print "Boss level detected."
+                if world == 1:
+                    self.addLacy(13, 51)
         except Exception as e:
             print e
             #if no entities in Level
