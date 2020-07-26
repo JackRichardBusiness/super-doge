@@ -122,7 +122,10 @@ class Mario(EntityBase):
 
     def killEntity(self, ent):
         if not self.levelObj.makermode:
-            if ent.__class__.__name__ != "Koopa":
+            if ent.__class__.__name__ == "Lacy":
+                print "LACY"
+                ent.onDead(self.camera)
+            elif ent.__class__.__name__ != "Koopa":
                 ent.alive = False
             else:
                 ent.timer = 0

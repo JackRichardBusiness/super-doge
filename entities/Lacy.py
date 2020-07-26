@@ -22,8 +22,10 @@ class Lacy(EntityBase):
         self.dashboard = level.dashboard
         self.lives = 3
         self.level = level
+        self.immuneTimer = 0
 
     def update(self, camera):
+        self.immuneTimer += 1
         if self.lives < 1:
             self.drawFlatGoomba(camera)
         if self.alive:
@@ -40,8 +42,10 @@ class Lacy(EntityBase):
     def onDead(self, camera):
         if self.timer == 0:
             self.setPointsTextStartPosition(self.rect.x + 3, self.rect.y)
-        if self.timer < self.timeAfterDeath:
+        if self.timer < self.timeAfterDeath and self.immuneTimer > 50:
             self.lives = self.lives - 1
+            self.immuneTimer = 0
+            self.level.mario.setPos(self.level.mario.rect.x, 3*32)
         else:
             self.alive = None
         self.timer += 0.1

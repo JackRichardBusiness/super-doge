@@ -28,7 +28,7 @@ class LacyFight:
         self.jump(self.entity.inJump)
         
         if abs(self.entity.rect.x - self.level.mario.rect.x) < 150 and not self.entity.inJump:
-            if randint(0, 250) == 100:
+            if randint(0, 250) == 100 and self.level.mario.rect.y == 384:
                 self.jump(True)
 
     def moveEntity(self):
