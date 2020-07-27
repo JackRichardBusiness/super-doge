@@ -21,6 +21,7 @@ class Menu:
         self.inChoosingLevel = False
         self.dashboard = dashboard
         self.levelCount = 0
+        self.worldSelect = "1"
         self.spritesheet = Spritesheet("./img/title_screen.png")
         self.menu_banner = self.spritesheet.image_at(
             0,
@@ -185,8 +186,8 @@ class Menu:
             for file in f:
                 files.append(os.path.join(r, file))
         for f in files:
-            res.append(os.path.split(f)[1].split(".")[0])
-        res.remove("Level0-0")
+            if (self.worldSelect + "-") in os.path.split(f)[1]:
+                res.append(os.path.split(f)[1].split(".")[0])
         self.levelCount = len(res)
         return res
 
@@ -223,6 +224,11 @@ class Menu:
                     if self.currSelectedLevel > 1:
                         self.currSelectedLevel -= 1
                         self.drawLevelChooser()
+                    elif self.currSelectedLevel == 1:
+                        self.currSelectedLevel = 1
+                        if int(self.worldSelect) > 1:
+                            self.worldSelect = str(int(self.worldSelect) - 1)
+                            self.chooseLevel()
                 elif event.key == pygame.K_RIGHT or event.key == pygame.K_l:
                     if self.inSettings:
                         print "Activating Maker Mode..."
@@ -235,6 +241,11 @@ class Menu:
                     if self.currSelectedLevel < self.levelCount:
                         self.currSelectedLevel += 1
                         self.drawLevelChooser()
+                    elif self.currSelectedLevel == 6:
+                        self.currSelectedLevel = 1
+                        if int(self.worldSelect) < 6:
+                            self.worldSelect = str(int(self.worldSelect) + 1)
+                            self.chooseLevel()
                 elif event.key == pygame.K_RETURN:
                     if self.inChoosingLevel:
                         self.inChoosingLevel = False
@@ -243,6 +254,7 @@ class Menu:
                         self.level.loadLevel(self.levelNames[self.currSelectedLevel-1])
                         self.dashboard.levelName = self.levelNames[self.currSelectedLevel-1].split("Level")[1]
                         self.start = True
+                        print self.dashboard.levelName
                         return
                     if not self.inSettings:
                         if self.state == 0:
