@@ -11,6 +11,13 @@ class Sound:
         self.allowSFX = True
 
         self.soundtrack = mixer.Sound("./sfx/main_theme.ogg")
+        self.castle = mixer.Sound("./sfx/castletheme.ogg")
+        self.desert = mixer.Sound("./sfx/deserttheme.ogg")
+        self.haunted = mixer.Sound("./sfx/hauntedtheme.ogg")
+        self.snow = mixer.Sound("./sfx/snowtheme.ogg")
+        self.underground = mixer.Sound("./sfx/undergroundtheme.ogg")
+        self.underwater = mixer.Sound("./sfx/underwatertheme.ogg")
+        
         self.coin = mixer.Sound("./sfx/coin.ogg")
         self.bump = mixer.Sound("./sfx/bump.ogg")
         self.stomp = mixer.Sound("./sfx/stomp.ogg")

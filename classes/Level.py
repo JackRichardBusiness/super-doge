@@ -30,6 +30,22 @@ class Level:
             self.levelLength = data["length"]
             if levelname == "Level0-0":
                 self.makermode = True
+            worldNum = int(levelname.split("Level")[1].split("-")[0])
+            if worldNum == 2:
+                self.sound.music_channel.stop()
+                self.sound.play_music(self.sound.snow)
+            if worldNum == 3:
+                self.sound.music_channel.stop()
+                self.sound.play_music(self.sound.desert)
+            if worldNum == 4:
+                self.sound.music_channel.stop()
+                self.sound.play_music(self.sound.haunted)
+            if worldNum == 5:
+                self.sound.music_channel.stop()
+                self.sound.play_music(self.sound.underwater)
+            if worldNum == 6:
+                self.sound.music_channel.stop()
+                self.sound.play_music(self.sound.castle)
 
     def loadEntities(self, data, levelname=""):
         try:
