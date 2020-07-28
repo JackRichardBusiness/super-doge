@@ -23,20 +23,14 @@ class Level:
 
     def loadLevel(self, levelname):
         with open("./levels/{}.json".format(levelname)) as jsonData:
-            data = json.load(jsonData)
-            self.loadLayers(data)
-            self.loadObjects(data)
-            self.loadEntities(data, levelname)
-            self.levelLength = data["length"]
-            if levelname == "Level0-0":
-                self.makermode = True
             worldNum = int(levelname.split("Level")[1].split("-")[0])
             if worldNum == 2:
                 self.sound.music_channel.stop()
-                self.sound.play_music(self.sound.snow)
+                self.sound.play_music(self.sound.desert)
+                self.sprites = Sprites("Desert")
             if worldNum == 3:
                 self.sound.music_channel.stop()
-                self.sound.play_music(self.sound.desert)
+                self.sound.play_music(self.sound.snow)
             if worldNum == 4:
                 self.sound.music_channel.stop()
                 self.sound.play_music(self.sound.haunted)
@@ -46,7 +40,14 @@ class Level:
             if worldNum == 6:
                 self.sound.music_channel.stop()
                 self.sound.play_music(self.sound.castle)
-
+            data = json.load(jsonData)
+            self.loadLayers(data)
+            self.loadObjects(data)
+            self.loadEntities(data, levelname)
+            self.levelLength = data["length"]
+            if levelname == "Level0-0":
+                self.makermode = True
+            
     def loadEntities(self, data, levelname=""):
         try:
             [self.addRandomBox(x, y) for x, y in data["level"]["entities"]["randomBox"]]

@@ -6,7 +6,7 @@ from classes.Spritesheet import Spritesheet
 
 
 class Sprites:
-    def __init__(self):
+    def __init__(self, suffix=""):
         self.spriteCollection = self.loadSprites(
             [
                 "./sprites/Mario.json",
@@ -16,10 +16,10 @@ class Sprites:
                 "./sprites/Animations.json",
                 "./sprites/BackgroundSprites.json",
                 "./sprites/ItemAnimations.json",
-            ]
+            ], suffix
         )
 
-    def loadSprites(self, urlList):
+    def loadSprites(self, urlList, suffix):
         resDict = {}
         for url in urlList:
             with open(url) as jsonData:
@@ -27,13 +27,14 @@ class Sprites:
                 mySpritesheet = Spritesheet(data["spriteSheetURL"])
                 dic = {}
                 if data["type"] == "background":
+                    spritesheet = Spritesheet(data["spriteSheetURL"].split(".png")[0]+suffix+".png")
                     for sprite in data["sprites"]:
                         try:
                             colorkey = sprite["colorKey"]
                         except KeyError:
                             colorkey = None
                         dic[sprite["name"]] = Sprite(
-                            mySpritesheet.image_at(
+                            spritesheet.image_at(
                                 sprite["x"],
                                 sprite["y"],
                                 sprite["scalefactor"],
