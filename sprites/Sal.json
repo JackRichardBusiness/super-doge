@@ -1,0 +1,23 @@
+{
+    "spriteSheetURL": "./img/characters.gif",
+    "type":"character",
+    "size":[45,23],
+    "sprites":[
+        {
+            "name":"sal-1",
+            "x":167,
+            "y":179,
+            "scalefactor":4,
+            "colorKey":0,
+            "collision":false
+        },
+        {
+            "name":"sal-2",
+            "x":167,
+            "y":179,
+            "scalefactor":4,
+            "colorKey":0,
+            "collision":false
+        }
+    ]
+}
