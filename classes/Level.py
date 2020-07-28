@@ -32,6 +32,7 @@ class Level:
             if worldNum == 3:
                 self.sound.music_channel.stop()
                 self.sound.play_music(self.sound.snow)
+                self.sprites = Sprites("Snow")
             if worldNum == 4:
                 self.sound.music_channel.stop()
                 self.sound.play_music(self.sound.haunted)
