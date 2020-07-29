@@ -3,6 +3,7 @@ from classes.Maths import vec2D
 from entities.EntityBase import EntityBase
 from traits.salfight import SalFight
 from time import sleep
+import pygame
 
 class Sal(EntityBase):
     def __init__(self, screen, spriteColl, x, y, level):
@@ -36,7 +37,13 @@ class Sal(EntityBase):
             self.onDead(camera)
 
     def drawSal(self, camera):
-        self.screen.blit(self.animation.image, (self.rect.x + camera.x - 16, self.rect.y - 60))
+        if self.leftrightTrait.direction == -1:
+            self.screen.blit(self.animation.image, (self.rect.x + camera.x - 16, self.rect.y - 60))
+        else:
+            self.screen.blit(
+                pygame.transform.flip(self.animation.image, True, False),
+                (self.rect.x + camera.x - 16, self.rect.y - 60),
+            )
         self.animation.update()
 
     def onDead(self, camera):
