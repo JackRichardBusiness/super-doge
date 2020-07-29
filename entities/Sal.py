@@ -21,7 +21,7 @@ class Sal(EntityBase):
         self.inAir = False
         self.inJump = False
         self.dashboard = level.dashboard
-        self.lives = 3
+        self.lives = 4
         self.level = level
         self.immuneTimer = 0
 
@@ -53,6 +53,7 @@ class Sal(EntityBase):
             self.lives = self.lives - 1
             self.immuneTimer = 0
             self.level.mario.setPos(self.level.mario.rect.x, 3*32)
+            self.alive = True
         else:
             self.alive = None
         self.timer += 0.1
