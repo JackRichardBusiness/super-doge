@@ -1,0 +1,24 @@
+{
+    "spriteSheetURL": "./img/characters.gif",
+    "type":"character",
+    "size":[28,25],
+    "sprites":[
+        {
+            "name":"henrietta-1",
+            "x":232,
+            "y":161,
+            "scalefactor":2,
+            "colorKey":-1,
+            "collision":false
+        },
+        {
+            "name":"henrietta-2",
+            "x":232,
+            "y":161,
+            "scalefactor":2,
+            "colorKey":-1,
+            "collision":false
+        }
+    ]
+}
+

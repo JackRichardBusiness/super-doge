@@ -14,6 +14,7 @@ class Sprites:
                 "./sprites/Koopa.json",
                 "./sprites/Lacy.json",
                 "./sprites/Sal.json",
+                "./sprites/Henrietta.json",
                 "./sprites/Animations.json",
                 "./sprites/BackgroundSprites.json",
                 "./sprites/ItemAnimations.json",

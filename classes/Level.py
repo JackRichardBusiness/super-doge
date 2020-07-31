@@ -9,6 +9,7 @@ from entities.Koopa import Koopa
 from entities.RandomBox import RandomBox
 from entities.Lacy import Lacy
 from entities.Sal import Sal
+from entities.Henrietta import Henrietta
 
 class Level:
     def __init__(self, screen, sound, dashboard):
@@ -36,6 +37,7 @@ class Level:
             if worldNum == 4:
                 self.sound.music_channel.stop()
                 self.sound.play_music(self.sound.haunted)
+                self.sprites = Sprites("Haunted")
             if worldNum == 5:
                 self.sound.music_channel.stop()
                 self.sound.play_music(self.sound.underwater)
@@ -64,6 +66,8 @@ class Level:
                     self.addLacy(13, 51)
                 elif world == 2:
                     self.addSal(13, 51)
+                elif world == 3:
+                    self.addHenrietta(13, 57)
         except Exception as e:
             print e
             #if no entities in Level
@@ -205,6 +209,11 @@ class Level:
     def addSal(self, x, y):
         self.entityList.append(
             Sal(self.screen, self.sprites.spriteCollection, x, y, self)
+        )
+
+    def addHenrietta(self, x, y):
+        self.entityList.append(
+            Henrietta(self.screen, self.sprites.spriteCollection, x, y, self)
         )
 
     def addKoopa(self, x, y):
