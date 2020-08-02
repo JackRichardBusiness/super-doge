@@ -24,6 +24,7 @@ class Sound:
         self.jump = mixer.Sound("./sfx/small_jump.ogg")
         self.death = mixer.Sound("./sfx/death.wav")
         self.clear = mixer.Sound("./sfx/clear.ogg")
+        self.pipe = mixer.Sound("./sfx/pipe.ogg")
 
     def play_sfx(self, sfx):
         if self.allowSFX:

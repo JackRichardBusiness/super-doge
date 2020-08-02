@@ -18,6 +18,7 @@ class Input:
         self.mouseX = 0
         self.mouseY = 0
         self.entity = entity
+        self.allowMovement = True
 
     def checkForInput(self, makermode=False, level=None, player=None):
         self.checkForKeyboardInput(makermode, level, player)
@@ -27,16 +28,20 @@ class Input:
     def checkForKeyboardInput(self, makermode=False, level=None, player=None):
         pressedKeys = pygame.key.get_pressed()
 
-        if pressedKeys[K_LEFT] or pressedKeys[K_h] and not pressedKeys[K_RIGHT]:
+        if pressedKeys[K_LEFT] or pressedKeys[K_h] and not pressedKeys[K_RIGHT] and self.allowMovement:
             self.entity.traits["goTrait"].direction = -1
-        elif pressedKeys[K_RIGHT] or pressedKeys[K_l] and not pressedKeys[K_LEFT]:
+        elif pressedKeys[K_RIGHT] or pressedKeys[K_l] and not pressedKeys[K_LEFT] and self.allowMovement:
             self.entity.traits["goTrait"].direction = 1
         elif pressedKeys[K_s]:
             self.entity.stunned = False
+        elif pressedKeys[K_DOWN] and not pressedKeys[K_LEFT] and not pressedKeys[K_RIGHT]:
+            if level.level[int(self.entity.rect.y/32)+1][int(self.entity.rect.x/32)].sprite == level.sprites.spriteCollection.get("pipeL") and level.level[int(self.entity.rect.y/32)+1][int(self.entity.rect.x/32)].canUse:
+                # TODO
+                print "Coming soon!"
         else:
             self.entity.traits['goTrait'].direction = 0
 
-        isJumping = pressedKeys[K_SPACE] or pressedKeys[K_UP] or pressedKeys[K_k]
+        isJumping = pressedKeys[K_SPACE] or pressedKeys[K_UP] or pressedKeys[K_k] and self.allowMovement
         self.entity.traits['jumpTrait'].jump(isJumping)
 
         self.entity.traits['goTrait'].boost = pressedKeys[K_LSHIFT]

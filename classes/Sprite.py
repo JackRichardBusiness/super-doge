@@ -1,5 +1,5 @@
 class Sprite:
-    def __init__(self, image, colliding, animation=None, redrawBackground=False):
+    def __init__(self, image, colliding, animation=None, redrawBackground=False, canUse=False):
         self.image = image
         self.colliding = colliding
         self.animation = animation

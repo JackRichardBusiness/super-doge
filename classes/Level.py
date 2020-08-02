@@ -98,8 +98,11 @@ class Level:
             self.addBushSprite(x, y)
         for x, y in data["level"]["objects"]["cloud"]:
             self.addCloudSprite(x, y)
-        for x, y, z in data["level"]["objects"]["pipe"]:
-            self.addPipeSprite(x, y, z)
+        for pipe in data["level"]["objects"]["pipe"]:
+            try:
+                self.addPipeSprite(pipe[0], pipe[1], pipe[2], pipe[3] == 1)
+            except Exception as e:
+                self.addPipeSprite(pipe[0], pipe[1], pipe[2])
         for x, y in data["level"]["objects"]["sky"]:
             self.level[y][x] = Tile(self.sprites.spriteCollection.get("sky"), None)
         for x, y in data["level"]["objects"]["ground"]:
@@ -144,12 +147,13 @@ class Level:
         except IndexError:
             return
 
-    def addPipeSprite(self, x, y, length=2):
+    def addPipeSprite(self, x, y, length=2, canUse=False):
         try:
             # add Pipe Head
             self.level[y][x] = Tile(
                 self.sprites.spriteCollection.get("pipeL"),
                 pygame.Rect(x * 32, y * 32, 32, 32),
+                canUse,
             )
             self.level[y][x + 1] = Tile(
                 self.sprites.spriteCollection.get("pipeR"),

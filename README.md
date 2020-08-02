@@ -14,6 +14,7 @@ Forked from: https://github.com/mx0c/super-mario-python
 * Right: Move right  
 * Space: Jump
 * Slow lick/unstun: S (you'll need this for boss fights)
+* Left shift: Be a speedy doge
 
 ## Required dependencies
 
